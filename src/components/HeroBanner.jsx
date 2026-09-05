@@ -1,14 +1,14 @@
 import React from 'react';
 // Local Assets se image import kar rahe hain
-import imageOne from '../assets/imageone.png';
+import imagehero from '../assets/imagehero.png';
 
 export default function HeroBanner() {
   return (
-    <div className="relative w-full h-[320px] sm:h-[450px] md:h-[520px] lg:h-[580px] overflow-hidden bg-white rounded-2xl shadow-md border border-gray-100">
+    <div className="w-full bg-white border-b border-gray-100 shadow-sm rounded-none overflow-hidden">
       <img
-        src={imageOne}
+        src={imagehero}
         alt="Makhana Special Banner"
-        className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"
+        className="w-full h-auto min-h-[180px] sm:min-h-[260px] md:min-h-[340px] lg:min-h-[400px] object-fill object-center block rounded-none"
       />
     </div>
   );
