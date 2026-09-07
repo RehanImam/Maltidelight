@@ -1,18 +1,19 @@
+
+
 import React, { useState } from 'react';
 import HeroBanner from '../components/HeroBanner';
-import CategorySidebar from '../components/CategorySidebar';
 import ProductCard from '../components/ProductCard';
 import { mockProducts } from '../data/products';
 
 export default function HomePage({ selectedCategory, setSelectedCategory }) {
   const [sortBy, setSortBy] = useState('Relevance');
 
-  // Active Category Filtering
+  // Active Category Filtering safely handled
   const filteredProducts = selectedCategory === 'All'
     ? mockProducts 
-    : mockProducts.filter(p => p.category.toLowerCase() === selectedCategory.toLowerCase());
+    : mockProducts.filter(p => p.category?.toLowerCase() === selectedCategory?.toLowerCase());
 
-  // Sorting
+  // Sorting logic
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     if (sortBy === 'lowToHigh') return a.price - b.price;
     if (sortBy === 'highToLow') return b.price - a.price;
@@ -24,6 +25,7 @@ export default function HomePage({ selectedCategory, setSelectedCategory }) {
       <HeroBanner />
 
       <main className="max-w-7xl mx-auto px-4 py-6">
+        {/* Header Section */}
         <div className="flex justify-between items-center mb-5 pb-2 border-b">
           <h2 className="text-xl sm:text-2xl font-bold text-gray-800">
             {selectedCategory === 'All' ? 'All Products' : selectedCategory} 
@@ -44,24 +46,17 @@ export default function HomePage({ selectedCategory, setSelectedCategory }) {
           </div>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-6 items-start">
-          <CategorySidebar
-            selectedCategory={selectedCategory}
-            onSelectCategory={setSelectedCategory}
-          />
-
-          {/* Grid Layout: 2 Columns on Mobile, 4 Columns on Laptop */}
-          <div className="flex-1 w-full grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-            {sortedProducts.length > 0 ? (
-              sortedProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))
-            ) : (
-              <div className="col-span-full py-12 text-center text-gray-500 bg-white rounded border">
-                No products found in "{selectedCategory}". Select another category.
-              </div>
-            )}
-          </div>
+        {/* Full-width Product Grid */}
+        <div className="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
+          {sortedProducts.length > 0 ? (
+            sortedProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))
+          ) : (
+            <div className="col-span-full py-12 text-center text-gray-500 bg-white rounded border">
+              No products found in "{selectedCategory}". Select another category.
+            </div>
+          )}
         </div>
       </main>
     </div>

@@ -1,3 +1,5 @@
+
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
@@ -5,13 +7,25 @@ import { useCart } from '../context/CartContext';
 export default function AddressPage() {
   const navigate = useNavigate();
   const { totalPayable } = useCart();
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     address: '',
     city: '',
+    state: '',
     pincode: '',
   });
+
+  const indianStates = [
+    'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh',
+    'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand', 'Karnataka',
+    'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram',
+    'Nagaland', 'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu',
+    'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal',
+    'Andaman and Nicobar Islands', 'Chandigarh', 'Dadra and Nagar Haveli and Daman and Diu',
+    'Delhi', 'Jammu and Kashmir', 'Ladakh', 'Lakshadweep', 'Puducherry'
+  ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -86,10 +100,28 @@ export default function AddressPage() {
             </div>
           </div>
 
-          <div className="border-t pt-4 flex justify-between items-center">
+          {/* State Field */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-1">State *</label>
+            <select
+              required
+              className="w-full border border-gray-300 rounded p-2 bg-white focus:outline-none focus:border-red-600"
+              value={formData.state}
+              onChange={(e) => setFormData({ ...formData, state: e.target.value })}
+            >
+              <option value="">Select State</option>
+              {indianStates.map((st, idx) => (
+                <option key={idx} value={st}>
+                  {st}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="border-t pt-4 flex justify-between items-center mt-4">
             <div>
               <span className="text-gray-500 text-xs block">Total:</span>
-              <span className="font-bold text-base text-gray-800">₹{totalPayable.toFixed(2)}</span>
+              <span className="font-bold text-base text-gray-800">₹{(totalPayable || 0).toFixed(2)}</span>
             </div>
             <button
               type="submit"

@@ -1,3 +1,5 @@
+
+
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
@@ -5,6 +7,8 @@ import TopAnnouncementBar from './components/TopAnnouncementBar';
 import Navbar from './components/Navbar';
 import CartDrawer from './components/CartDrawer';
 import MobileMenu from './components/MobileMenu';
+import ComingSoon from './components/ComingSoon';
+import Footer from './components/Footer';
 
 import HomePage from './pages/HomePage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
@@ -15,7 +19,7 @@ function PageIndicator() {
   const location = useLocation();
   return (
     <div className="bg-gray-100 border-b border-gray-200 text-[11px] text-gray-500 py-1 px-4 text-center">
-      Current Route: <span className="font-semibold text-red-700">{location.pathname}</span>
+      Current Route: <span className="font-semibold text-red-700">{location.pathname}{location.search}</span>
     </div>
   );
 }
@@ -46,10 +50,12 @@ export default function App() {
                   />
                 } 
               />
+              <Route path="/coming-soon" element={<ComingSoon />} />
               <Route path="/product/:id" element={<ProductDetailsPage />} />
               <Route path="/address" element={<AddressPage />} />
               <Route path="/payment" element={<PaymentPage />} />
-              {/* Fallback route for unknown paths */}
+              
+              {/* Fallback route */}
               <Route 
                 path="*" 
                 element={
@@ -68,6 +74,9 @@ export default function App() {
             onClose={() => setIsMobileMenuOpen(false)} 
             onSelectCategory={setSelectedCategory}
           />
+
+          {/* Added Footer Component */}
+          <Footer />
         </div>
       </Router>
     </CartProvider>

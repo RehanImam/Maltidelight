@@ -19,12 +19,7 @@ export default function CartDrawer() {
           </button>
         </div>
 
-        {/* Free Shipping Banner */}
-        <div className="m-4 p-3 bg-emerald-50 rounded-lg border border-emerald-200 text-xs text-emerald-800 flex items-center gap-2">
-          <span>🎉</span>
-          <span>Congratulations 🎉 You going to get a good deal <strong>Delivery is free</strong> above ₹ 499!</span>
-        </div>
-
+        
         {/* Cart items list */}
         <div className="flex-1 overflow-y-auto px-4 divide-y">
           {cartItems.length === 0 ? (
@@ -96,7 +91,7 @@ export default function CartDrawer() {
                 }}
                 className="flex-1 py-2.5 bg-red-500 text-white rounded-full font-semibold text-xs hover:bg-red-600"
               >
-                Checkout
+                Fill Address
               </button>
             </div>
           </div>
