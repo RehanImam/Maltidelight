@@ -14,6 +14,7 @@ import HomePage from './pages/HomePage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
 import AddressPage from './pages/AddressPage';
 import PaymentPage from './pages/PaymentPage';
+import OrderSuccessPage from './pages/OrderSuccessPage';
 
 function PageIndicator() {
   const location = useLocation();
@@ -54,6 +55,7 @@ export default function App() {
               <Route path="/product/:id" element={<ProductDetailsPage />} />
               <Route path="/address" element={<AddressPage />} />
               <Route path="/payment" element={<PaymentPage />} />
+              <Route path="/order-success" element={<OrderSuccessPage />} />
               
               {/* Fallback route */}
               <Route 
@@ -75,7 +77,6 @@ export default function App() {
             onSelectCategory={setSelectedCategory}
           />
 
-          {/* Added Footer Component */}
           <Footer />
         </div>
       </Router>

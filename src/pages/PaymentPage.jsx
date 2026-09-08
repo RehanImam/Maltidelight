@@ -1,14 +1,18 @@
+
+
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 
 export default function PaymentPage() {
-  const { totalPayable, cartItems } = useCart();
+  const { totalPayable, cartItems, clearCart } = useCart();
+  const navigate = useNavigate();
   const [screenshot, setScreenshot] = useState(null);
   const [preview, setPreview] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const sellerUPI = "8826564286@paytm";
-  const sellerPhone = "+918826564286";
+  const sellerUPI = "165012368@paytm";
+  const sellerPhone = "+919473072298";
   const addressData = JSON.parse(localStorage.getItem('checkoutAddress') || '{}');
 
   const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=upi://pay?pa=${sellerUPI}&pn=MakhanaIndia&am=${totalPayable}`;
@@ -30,24 +34,22 @@ export default function PaymentPage() {
 
     setIsSubmitting(true);
 
-    const itemsSummary = cartItems.map(item => `${item.name} x${item.quantity}`).join(', ');
-    const orderDetails = `*NEW ORDER SUBMITTED*\n\n` +
-      `*Customer:* ${addressData.name || 'N/A'}\n` +
-      `*Phone:* ${addressData.phone || 'N/A'}\n` +
-      `*Address:* ${addressData.address || 'N/A'}, ${addressData.city || ''} - ${addressData.pincode || ''}\n` +
-      `*Items:* ${itemsSummary}\n` +
-      `*Total Paid:* ₹${totalPayable.toFixed(2)}\n\n` +
-      `*Payment Screenshot Uploaded!* Please check WhatsApp/Email for verification.`;
+    const orderData = {
+      amount: totalPayable,
+      orderId: 'ORD-' + Math.floor(100000 + Math.random() * 900000),
+      timestamp: new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }),
+      items: cartItems,
+      addressData: addressData,
+      sellerPhone: sellerPhone
+    };
 
-    const encodedMessage = encodeURIComponent(orderDetails);
-    const cleanPhone = sellerPhone.replace('+', '');
-    const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodedMessage}`;
+    localStorage.setItem('lastOrderData', JSON.stringify(orderData));
 
     setTimeout(() => {
       setIsSubmitting(false);
-      alert('Order & Details successfully recorded! Opening WhatsApp to send confirmation to seller...');
-      window.open(whatsappUrl, '_blank');
-    }, 1000);
+      if (clearCart) clearCart();
+      navigate('/order-success');
+    }, 1200);
   };
 
   return (
@@ -99,7 +101,7 @@ export default function PaymentPage() {
             disabled={isSubmitting}
             className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg shadow transition-colors text-xs flex items-center justify-center gap-2"
           >
-            {isSubmitting ? 'Processing Order...' : 'Submit & Send Order Details to Seller'}
+            {isSubmitting ? 'Processing Payment...' : 'Submit Payment Screenshot'}
           </button>
         </form>
       </div>
