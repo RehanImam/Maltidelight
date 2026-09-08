@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import TopAnnouncementBar from './components/TopAnnouncementBar';
 import Navbar from './components/Navbar';
