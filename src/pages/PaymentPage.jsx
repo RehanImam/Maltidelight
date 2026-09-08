@@ -1,5 +1,3 @@
-
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
@@ -43,6 +41,7 @@ export default function PaymentPage() {
       sellerPhone: sellerPhone
     };
 
+    localStorage.getItem('lastOrderData');
     localStorage.setItem('lastOrderData', JSON.stringify(orderData));
 
     setTimeout(() => {
@@ -66,7 +65,7 @@ export default function PaymentPage() {
         </div>
 
         <div className="bg-red-50 p-2.5 rounded text-xs text-red-800 font-medium">
-          Total Amount to Pay: <span className="text-base font-bold text-red-700">₹{totalPayable.toFixed(2)}</span>
+          Total Amount to Pay: <span className="text-base font-bold text-red-700">₹{totalPayable ? totalPayable.toFixed(2) : '0.00'}</span>
         </div>
 
         {/* Display Seller Contact Info */}
