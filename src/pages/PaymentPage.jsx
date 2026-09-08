@@ -9,7 +9,7 @@ export default function PaymentPage() {
   const [preview, setPreview] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const sellerUPI = "165012368@paytm";
+  const sellerUPI = "maltidelight2298@ptyes";
   const sellerPhone = "+919473072298";
   const addressData = JSON.parse(localStorage.getItem('checkoutAddress') || '{}');
 
