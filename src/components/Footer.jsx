@@ -17,19 +17,19 @@ export default function Footer() {
             </p>
             {/* Social Icons */}
             <div className="flex items-center gap-3 pt-2 text-gray-300">
-              <a href="#" className="hover:text-white transition-colors">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Instagram">
                 <i className="fab fa-instagram text-base"></i>
               </a>
-              <a href="#" className="hover:text-white transition-colors">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Facebook">
                 <i className="fab fa-facebook-f text-sm"></i>
               </a>
-              <a href="#" className="hover:text-white transition-colors">
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Twitter">
                 <i className="fab fa-twitter text-sm"></i>
               </a>
-              <a href="#" className="hover:text-white transition-colors">
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="LinkedIn">
                 <i className="fab fa-linkedin-in text-sm"></i>
               </a>
-              <a href="#" className="hover:text-white transition-colors">
+              <a href="https://pinterest.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Pinterest">
                 <i className="fab fa-pinterest-p text-sm"></i>
               </a>
             </div>
