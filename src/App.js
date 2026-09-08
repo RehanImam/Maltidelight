@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import TopAnnouncementBar from './components/TopAnnouncementBar';
@@ -15,14 +15,6 @@ import AddressPage from './pages/AddressPage';
 import PaymentPage from './pages/PaymentPage';
 import OrderSuccessPage from './pages/OrderSuccessPage';
 
-function PageIndicator() {
-  const location = useLocation();
-  return (
-    <div className="bg-gray-100 border-b border-gray-200 text-[11px] text-gray-500 py-1 px-4 text-center">
-      Current Route: <span className="font-semibold text-red-700">{location.pathname}{location.search}</span>
-    </div>
-  );
-}
 
 export default function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -37,7 +29,7 @@ export default function App() {
             onOpenMobileMenu={() => setIsMobileMenuOpen(true)} 
             onSelectCategory={setSelectedCategory}
           />
-          <PageIndicator />
+          
 
           <div className="flex-1">
             <Routes>
